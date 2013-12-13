@@ -90,7 +90,7 @@
         if (_.isString(binding)) binding = {observe:binding};
 
         // Handle case where `observe` is in the form of a function.
-        if (_.isFunction(binding.observe)) binding.observe = binding.observe.call(this, selector);
+        if (_.isFunction(binding.observe)) binding.observe = binding.observe.call(this);
 
         config = getConfiguration($el, binding);
 
