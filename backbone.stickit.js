@@ -90,7 +90,7 @@
         if (_.isString(binding)) binding = {observe:binding};
 
         // Handle case where `observe` is in the form of a function.
-        if (_.isFunction(binding.observe)) binding.observe = binding.observe.call(this);
+        if (_.isFunction(binding.observe)) binding.observe = binding.observe.call(this, selector);
 
         config = getConfiguration($el, binding);
 
@@ -112,7 +112,7 @@
           _.each(config.events, function(type) {
             var event = type + namespace;
             var method = function(event) {
-              var val = config.getVal.call(this, $el, event, config, _.rest(arguments));
+              var val = config.getVal.call(this, $el, event, config, model, _.rest(arguments));
               // Don't update the model if false is returned from the `updateModel` configuration.
               if (evaluateBoolean(this, config.updateModel, val, event, config))
                 setAttr(model, modelAttr, val, options, this, config);
